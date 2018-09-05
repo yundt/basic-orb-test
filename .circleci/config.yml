@@ -1,14 +1,20 @@
 version: 2.1
-jobs:
-  test:
-    docker:
-      - image: circleci/ruby:2.5.1
-    steps:
-      - checkout
-      - run: bundle install
-      - run: bundle exec rspec
+
+orbs:
+  rspec:
+    executors:
+      default:
+        docker:
+          - image: circleci/ruby:2.5.1
+    jobs:
+      bundle-and-execute:
+        executor: default
+        steps:
+          - checkout
+          - run: bundle install
+          - run: bundle exec rspec
 
 workflows:
   test:
     jobs:
-      - test
+      - rspec/bundle-and-execute

@@ -1,18 +1,7 @@
 version: 2.1
 
 orbs:
-  rspec:
-    executors:
-      default:
-        docker:
-          - image: circleci/ruby:2.5.1
-    jobs:
-      bundle-and-execute:
-        executor: default
-        steps:
-          - checkout
-          - run: bundle install
-          - run: bundle exec rspec
+  rspec: yundt/test-rspec@dev:test
 
 workflows:
   test:
